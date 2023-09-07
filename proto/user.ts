@@ -55,6 +55,18 @@ export interface GetUserListResponse {
   list: User[];
 }
 
+export interface GetUserListRequest {
+  id: number;
+  nickname: string;
+  email: string;
+  phone: string;
+  introduction: string;
+  createTimeStart: number;
+  createTimeEnd: number;
+  updateTimeStart: number;
+  updateTimeEnd: number;
+}
+
 function createBaseProfileResponse(): ProfileResponse {
   return { userId: 0, email: "", phone: "", nickname: "", birthday: "", introduction: "" };
 }
@@ -791,6 +803,195 @@ export const GetUserListResponse = {
     const message = createBaseGetUserListResponse();
     message.total = object.total ?? 0;
     message.list = object.list?.map((e) => User.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseGetUserListRequest(): GetUserListRequest {
+  return {
+    id: 0,
+    nickname: "",
+    email: "",
+    phone: "",
+    introduction: "",
+    createTimeStart: 0,
+    createTimeEnd: 0,
+    updateTimeStart: 0,
+    updateTimeEnd: 0,
+  };
+}
+
+export const GetUserListRequest = {
+  encode(message: GetUserListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).uint64(message.id);
+    }
+    if (message.nickname !== "") {
+      writer.uint32(18).string(message.nickname);
+    }
+    if (message.email !== "") {
+      writer.uint32(26).string(message.email);
+    }
+    if (message.phone !== "") {
+      writer.uint32(34).string(message.phone);
+    }
+    if (message.introduction !== "") {
+      writer.uint32(42).string(message.introduction);
+    }
+    if (message.createTimeStart !== 0) {
+      writer.uint32(48).int64(message.createTimeStart);
+    }
+    if (message.createTimeEnd !== 0) {
+      writer.uint32(56).int64(message.createTimeEnd);
+    }
+    if (message.updateTimeStart !== 0) {
+      writer.uint32(64).int64(message.updateTimeStart);
+    }
+    if (message.updateTimeEnd !== 0) {
+      writer.uint32(72).int64(message.updateTimeEnd);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetUserListRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetUserListRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.id = longToNumber(reader.uint64() as Long);
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.nickname = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.email = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.phone = reader.string();
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.introduction = reader.string();
+          continue;
+        case 6:
+          if (tag !== 48) {
+            break;
+          }
+
+          message.createTimeStart = longToNumber(reader.int64() as Long);
+          continue;
+        case 7:
+          if (tag !== 56) {
+            break;
+          }
+
+          message.createTimeEnd = longToNumber(reader.int64() as Long);
+          continue;
+        case 8:
+          if (tag !== 64) {
+            break;
+          }
+
+          message.updateTimeStart = longToNumber(reader.int64() as Long);
+          continue;
+        case 9:
+          if (tag !== 72) {
+            break;
+          }
+
+          message.updateTimeEnd = longToNumber(reader.int64() as Long);
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetUserListRequest {
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0,
+      nickname: isSet(object.nickname) ? String(object.nickname) : "",
+      email: isSet(object.email) ? String(object.email) : "",
+      phone: isSet(object.phone) ? String(object.phone) : "",
+      introduction: isSet(object.introduction) ? String(object.introduction) : "",
+      createTimeStart: isSet(object.createTimeStart) ? Number(object.createTimeStart) : 0,
+      createTimeEnd: isSet(object.createTimeEnd) ? Number(object.createTimeEnd) : 0,
+      updateTimeStart: isSet(object.updateTimeStart) ? Number(object.updateTimeStart) : 0,
+      updateTimeEnd: isSet(object.updateTimeEnd) ? Number(object.updateTimeEnd) : 0,
+    };
+  },
+
+  toJSON(message: GetUserListRequest): unknown {
+    const obj: any = {};
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
+    }
+    if (message.nickname !== "") {
+      obj.nickname = message.nickname;
+    }
+    if (message.email !== "") {
+      obj.email = message.email;
+    }
+    if (message.phone !== "") {
+      obj.phone = message.phone;
+    }
+    if (message.introduction !== "") {
+      obj.introduction = message.introduction;
+    }
+    if (message.createTimeStart !== 0) {
+      obj.createTimeStart = Math.round(message.createTimeStart);
+    }
+    if (message.createTimeEnd !== 0) {
+      obj.createTimeEnd = Math.round(message.createTimeEnd);
+    }
+    if (message.updateTimeStart !== 0) {
+      obj.updateTimeStart = Math.round(message.updateTimeStart);
+    }
+    if (message.updateTimeEnd !== 0) {
+      obj.updateTimeEnd = Math.round(message.updateTimeEnd);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetUserListRequest>, I>>(base?: I): GetUserListRequest {
+    return GetUserListRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetUserListRequest>, I>>(object: I): GetUserListRequest {
+    const message = createBaseGetUserListRequest();
+    message.id = object.id ?? 0;
+    message.nickname = object.nickname ?? "";
+    message.email = object.email ?? "";
+    message.phone = object.phone ?? "";
+    message.introduction = object.introduction ?? "";
+    message.createTimeStart = object.createTimeStart ?? 0;
+    message.createTimeEnd = object.createTimeEnd ?? 0;
+    message.updateTimeStart = object.updateTimeStart ?? 0;
+    message.updateTimeEnd = object.updateTimeEnd ?? 0;
     return message;
   },
 };

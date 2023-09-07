@@ -55,3 +55,15 @@ message GetUserListResponse {
   int64 total = 1;
   repeated User list = 2;
 }
+
+message GetUserListRequest {
+  uint64 id = 1;
+  string nickname = 2;
+  string email = 3;
+  string phone = 4;
+  string introduction = 5;
+  int64 create_time_start = 6;
+  int64 create_time_end = 7;
+  int64 update_time_start = 8;
+  int64 update_time_end = 9;
+}
