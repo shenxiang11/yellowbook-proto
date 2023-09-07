@@ -3,7 +3,7 @@ syntax = "proto3";
 option go_package = "github.com/shenxiang11/yellowbook-proto/webproto";
 
 message ProfileResponse {
-  uint64 userId = 1;
+  uint64 user_id = 1;
   string email = 2;
   string phone = 3;
   string nickname = 4;
