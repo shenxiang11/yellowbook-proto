@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option go_package = "github.com/shenxiang11/yellowbook-proto/webproto";
+
+message ProfileResponse {
+  uint64 userId = 1;
+  string email = 2;
+  string phone = 3;
+  string nickname = 4;
+  string birthday = 5;
+  string introduction = 6;
+}
+
+message SignUpRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message EditRequest {
+  string nickname = 1;
+  string birthday = 2;
+  string introduction = 3;
+}
+
+message SendLoginSMSCodeRequest {
+  string phone = 1;
+}
+
+message LoginSMSRequest {
+  string phone = 1;
+  string code = 2;
+}
