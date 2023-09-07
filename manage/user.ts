@@ -16,6 +16,11 @@ export interface User {
   updateTime: Date | undefined;
 }
 
+export interface GetUserListResponse {
+  total: number;
+  list: User[];
+}
+
 function createBaseUser(): User {
   return {
     id: 0,
@@ -185,6 +190,80 @@ export const User = {
     message.introduction = object.introduction ?? "";
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
+    return message;
+  },
+};
+
+function createBaseGetUserListResponse(): GetUserListResponse {
+  return { total: 0, list: [] };
+}
+
+export const GetUserListResponse = {
+  encode(message: GetUserListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.total !== 0) {
+      writer.uint32(8).int64(message.total);
+    }
+    for (const v of message.list) {
+      User.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetUserListResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetUserListResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.total = longToNumber(reader.int64() as Long);
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.list.push(User.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetUserListResponse {
+    return {
+      total: isSet(object.total) ? Number(object.total) : 0,
+      list: Array.isArray(object?.list) ? object.list.map((e: any) => User.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: GetUserListResponse): unknown {
+    const obj: any = {};
+    if (message.total !== 0) {
+      obj.total = Math.round(message.total);
+    }
+    if (message.list?.length) {
+      obj.list = message.list.map((e) => User.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetUserListResponse>, I>>(base?: I): GetUserListResponse {
+    return GetUserListResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetUserListResponse>, I>>(object: I): GetUserListResponse {
+    const message = createBaseGetUserListResponse();
+    message.total = object.total ?? 0;
+    message.list = object.list?.map((e) => User.fromPartial(e)) || [];
     return message;
   },
 };

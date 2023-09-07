@@ -14,3 +14,8 @@ message User {
   google.protobuf.Timestamp create_time = 7;
   google.protobuf.Timestamp update_time = 8;
 }
+
+message GetUserListResponse {
+  int64 total = 1;
+  repeated User list = 2;
+}
