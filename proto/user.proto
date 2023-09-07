@@ -2,8 +2,6 @@ syntax = "proto3";
 
 option go_package = "github.com/shenxiang11/yellowbook-proto/proto";
 
-import "google/protobuf/timestamp.proto"; // 导入 Timestamp 类型
-
 // web
 message ProfileResponse {
   uint64 user_id = 1;
@@ -49,8 +47,8 @@ message User {
   string nickname = 4;
   string birthday = 5;
   string introduction = 6;
-  google.protobuf.Timestamp create_time = 7;
-  google.protobuf.Timestamp update_time = 8;
+  string create_time = 7;
+  string update_time = 8;
 }
 
 message GetUserListResponse {
