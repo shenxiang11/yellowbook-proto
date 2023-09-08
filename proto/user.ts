@@ -65,6 +65,8 @@ export interface GetUserListRequest {
   createTimeEnd: number;
   updateTimeStart: number;
   updateTimeEnd: number;
+  page: number;
+  pageSize: number;
 }
 
 function createBaseProfileResponse(): ProfileResponse {
@@ -818,6 +820,8 @@ function createBaseGetUserListRequest(): GetUserListRequest {
     createTimeEnd: 0,
     updateTimeStart: 0,
     updateTimeEnd: 0,
+    page: 0,
+    pageSize: 0,
   };
 }
 
@@ -849,6 +853,12 @@ export const GetUserListRequest = {
     }
     if (message.updateTimeEnd !== 0) {
       writer.uint32(72).int64(message.updateTimeEnd);
+    }
+    if (message.page !== 0) {
+      writer.uint32(80).int32(message.page);
+    }
+    if (message.pageSize !== 0) {
+      writer.uint32(88).int32(message.pageSize);
     }
     return writer;
   },
@@ -923,6 +933,20 @@ export const GetUserListRequest = {
 
           message.updateTimeEnd = longToNumber(reader.int64() as Long);
           continue;
+        case 10:
+          if (tag !== 80) {
+            break;
+          }
+
+          message.page = reader.int32();
+          continue;
+        case 11:
+          if (tag !== 88) {
+            break;
+          }
+
+          message.pageSize = reader.int32();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -943,6 +967,8 @@ export const GetUserListRequest = {
       createTimeEnd: isSet(object.createTimeEnd) ? Number(object.createTimeEnd) : 0,
       updateTimeStart: isSet(object.updateTimeStart) ? Number(object.updateTimeStart) : 0,
       updateTimeEnd: isSet(object.updateTimeEnd) ? Number(object.updateTimeEnd) : 0,
+      page: isSet(object.page) ? Number(object.page) : 0,
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
     };
   },
 
@@ -975,6 +1001,12 @@ export const GetUserListRequest = {
     if (message.updateTimeEnd !== 0) {
       obj.updateTimeEnd = Math.round(message.updateTimeEnd);
     }
+    if (message.page !== 0) {
+      obj.page = Math.round(message.page);
+    }
+    if (message.pageSize !== 0) {
+      obj.pageSize = Math.round(message.pageSize);
+    }
     return obj;
   },
 
@@ -992,6 +1024,8 @@ export const GetUserListRequest = {
     message.createTimeEnd = object.createTimeEnd ?? 0;
     message.updateTimeStart = object.updateTimeStart ?? 0;
     message.updateTimeEnd = object.updateTimeEnd ?? 0;
+    message.page = object.page ?? 0;
+    message.pageSize = object.pageSize ?? 0;
     return message;
   },
 };
