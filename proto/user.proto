@@ -68,4 +68,5 @@ message GetUserListRequest {
   int64 update_time_end = 9;
   int32 page = 10;
   int32 page_size = 11;
+  int64 birthday = 12;
 }
