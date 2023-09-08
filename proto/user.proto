@@ -57,16 +57,16 @@ message GetUserListResponse {
 }
 
 message GetUserListRequest {
-  uint64 id = 1;
-  string nickname = 2;
-  string email = 3;
-  string phone = 4;
-  string introduction = 5;
-  int64 create_time_start = 6;
-  int64 create_time_end = 7;
-  int64 update_time_start = 8;
-  int64 update_time_end = 9;
+  optional uint64 id = 1;
+  optional string nickname = 2;
+  optional string email = 3;
+  optional string phone = 4;
+  optional string introduction = 5;
+  optional int64 create_time_start = 6;
+  optional int64 create_time_end = 7;
+  optional int64 update_time_start = 8;
+  optional int64 update_time_end = 9;
   int32 page = 10;
   int32 page_size = 11;
-  int64 birthday = 12;
+  optional int64 birthday = 12;
 }
