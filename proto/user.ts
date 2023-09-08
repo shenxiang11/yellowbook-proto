@@ -56,18 +56,18 @@ export interface GetUserListResponse {
 }
 
 export interface GetUserListRequest {
-  id?: number | undefined;
-  nickname?: string | undefined;
-  email?: string | undefined;
-  phone?: string | undefined;
-  introduction?: string | undefined;
-  createTimeStart?: number | undefined;
-  createTimeEnd?: number | undefined;
-  updateTimeStart?: number | undefined;
-  updateTimeEnd?: number | undefined;
+  id: number;
+  nickname: string;
+  email: string;
+  phone: string;
+  introduction: string;
+  createTimeStart: number;
+  createTimeEnd: number;
+  updateTimeStart: number;
+  updateTimeEnd: number;
   page: number;
   pageSize: number;
-  birthday?: number | undefined;
+  birthday: number;
 }
 
 function createBaseProfileResponse(): ProfileResponse {
@@ -812,48 +812,48 @@ export const GetUserListResponse = {
 
 function createBaseGetUserListRequest(): GetUserListRequest {
   return {
-    id: undefined,
-    nickname: undefined,
-    email: undefined,
-    phone: undefined,
-    introduction: undefined,
-    createTimeStart: undefined,
-    createTimeEnd: undefined,
-    updateTimeStart: undefined,
-    updateTimeEnd: undefined,
+    id: 0,
+    nickname: "",
+    email: "",
+    phone: "",
+    introduction: "",
+    createTimeStart: 0,
+    createTimeEnd: 0,
+    updateTimeStart: 0,
+    updateTimeEnd: 0,
     page: 0,
     pageSize: 0,
-    birthday: undefined,
+    birthday: 0,
   };
 }
 
 export const GetUserListRequest = {
   encode(message: GetUserListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== undefined) {
+    if (message.id !== 0) {
       writer.uint32(8).uint64(message.id);
     }
-    if (message.nickname !== undefined) {
+    if (message.nickname !== "") {
       writer.uint32(18).string(message.nickname);
     }
-    if (message.email !== undefined) {
+    if (message.email !== "") {
       writer.uint32(26).string(message.email);
     }
-    if (message.phone !== undefined) {
+    if (message.phone !== "") {
       writer.uint32(34).string(message.phone);
     }
-    if (message.introduction !== undefined) {
+    if (message.introduction !== "") {
       writer.uint32(42).string(message.introduction);
     }
-    if (message.createTimeStart !== undefined) {
+    if (message.createTimeStart !== 0) {
       writer.uint32(48).int64(message.createTimeStart);
     }
-    if (message.createTimeEnd !== undefined) {
+    if (message.createTimeEnd !== 0) {
       writer.uint32(56).int64(message.createTimeEnd);
     }
-    if (message.updateTimeStart !== undefined) {
+    if (message.updateTimeStart !== 0) {
       writer.uint32(64).int64(message.updateTimeStart);
     }
-    if (message.updateTimeEnd !== undefined) {
+    if (message.updateTimeEnd !== 0) {
       writer.uint32(72).int64(message.updateTimeEnd);
     }
     if (message.page !== 0) {
@@ -862,7 +862,7 @@ export const GetUserListRequest = {
     if (message.pageSize !== 0) {
       writer.uint32(88).int32(message.pageSize);
     }
-    if (message.birthday !== undefined) {
+    if (message.birthday !== 0) {
       writer.uint32(96).int64(message.birthday);
     }
     return writer;
@@ -970,48 +970,48 @@ export const GetUserListRequest = {
 
   fromJSON(object: any): GetUserListRequest {
     return {
-      id: isSet(object.id) ? Number(object.id) : undefined,
-      nickname: isSet(object.nickname) ? String(object.nickname) : undefined,
-      email: isSet(object.email) ? String(object.email) : undefined,
-      phone: isSet(object.phone) ? String(object.phone) : undefined,
-      introduction: isSet(object.introduction) ? String(object.introduction) : undefined,
-      createTimeStart: isSet(object.createTimeStart) ? Number(object.createTimeStart) : undefined,
-      createTimeEnd: isSet(object.createTimeEnd) ? Number(object.createTimeEnd) : undefined,
-      updateTimeStart: isSet(object.updateTimeStart) ? Number(object.updateTimeStart) : undefined,
-      updateTimeEnd: isSet(object.updateTimeEnd) ? Number(object.updateTimeEnd) : undefined,
+      id: isSet(object.id) ? Number(object.id) : 0,
+      nickname: isSet(object.nickname) ? String(object.nickname) : "",
+      email: isSet(object.email) ? String(object.email) : "",
+      phone: isSet(object.phone) ? String(object.phone) : "",
+      introduction: isSet(object.introduction) ? String(object.introduction) : "",
+      createTimeStart: isSet(object.createTimeStart) ? Number(object.createTimeStart) : 0,
+      createTimeEnd: isSet(object.createTimeEnd) ? Number(object.createTimeEnd) : 0,
+      updateTimeStart: isSet(object.updateTimeStart) ? Number(object.updateTimeStart) : 0,
+      updateTimeEnd: isSet(object.updateTimeEnd) ? Number(object.updateTimeEnd) : 0,
       page: isSet(object.page) ? Number(object.page) : 0,
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
-      birthday: isSet(object.birthday) ? Number(object.birthday) : undefined,
+      birthday: isSet(object.birthday) ? Number(object.birthday) : 0,
     };
   },
 
   toJSON(message: GetUserListRequest): unknown {
     const obj: any = {};
-    if (message.id !== undefined) {
+    if (message.id !== 0) {
       obj.id = Math.round(message.id);
     }
-    if (message.nickname !== undefined) {
+    if (message.nickname !== "") {
       obj.nickname = message.nickname;
     }
-    if (message.email !== undefined) {
+    if (message.email !== "") {
       obj.email = message.email;
     }
-    if (message.phone !== undefined) {
+    if (message.phone !== "") {
       obj.phone = message.phone;
     }
-    if (message.introduction !== undefined) {
+    if (message.introduction !== "") {
       obj.introduction = message.introduction;
     }
-    if (message.createTimeStart !== undefined) {
+    if (message.createTimeStart !== 0) {
       obj.createTimeStart = Math.round(message.createTimeStart);
     }
-    if (message.createTimeEnd !== undefined) {
+    if (message.createTimeEnd !== 0) {
       obj.createTimeEnd = Math.round(message.createTimeEnd);
     }
-    if (message.updateTimeStart !== undefined) {
+    if (message.updateTimeStart !== 0) {
       obj.updateTimeStart = Math.round(message.updateTimeStart);
     }
-    if (message.updateTimeEnd !== undefined) {
+    if (message.updateTimeEnd !== 0) {
       obj.updateTimeEnd = Math.round(message.updateTimeEnd);
     }
     if (message.page !== 0) {
@@ -1020,7 +1020,7 @@ export const GetUserListRequest = {
     if (message.pageSize !== 0) {
       obj.pageSize = Math.round(message.pageSize);
     }
-    if (message.birthday !== undefined) {
+    if (message.birthday !== 0) {
       obj.birthday = Math.round(message.birthday);
     }
     return obj;
@@ -1031,18 +1031,18 @@ export const GetUserListRequest = {
   },
   fromPartial<I extends Exact<DeepPartial<GetUserListRequest>, I>>(object: I): GetUserListRequest {
     const message = createBaseGetUserListRequest();
-    message.id = object.id ?? undefined;
-    message.nickname = object.nickname ?? undefined;
-    message.email = object.email ?? undefined;
-    message.phone = object.phone ?? undefined;
-    message.introduction = object.introduction ?? undefined;
-    message.createTimeStart = object.createTimeStart ?? undefined;
-    message.createTimeEnd = object.createTimeEnd ?? undefined;
-    message.updateTimeStart = object.updateTimeStart ?? undefined;
-    message.updateTimeEnd = object.updateTimeEnd ?? undefined;
+    message.id = object.id ?? 0;
+    message.nickname = object.nickname ?? "";
+    message.email = object.email ?? "";
+    message.phone = object.phone ?? "";
+    message.introduction = object.introduction ?? "";
+    message.createTimeStart = object.createTimeStart ?? 0;
+    message.createTimeEnd = object.createTimeEnd ?? 0;
+    message.updateTimeStart = object.updateTimeStart ?? 0;
+    message.updateTimeEnd = object.updateTimeEnd ?? 0;
     message.page = object.page ?? 0;
     message.pageSize = object.pageSize ?? 0;
-    message.birthday = object.birthday ?? undefined;
+    message.birthday = object.birthday ?? 0;
     return message;
   },
 };
