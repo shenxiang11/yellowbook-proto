@@ -10,6 +10,7 @@ message ProfileResponse {
   string nickname = 4;
   string birthday = 5;
   string introduction = 6;
+  string avatar = 7;
 }
 
 message SignUpRequest {
@@ -26,6 +27,7 @@ message EditRequest {
   string nickname = 1;
   string birthday = 2;
   string introduction = 3;
+  string avatar = 4;
 }
 
 message SendLoginSMSCodeRequest {
@@ -49,6 +51,7 @@ message User {
   string introduction = 6;
   string create_time = 7;
   string update_time = 8;
+  string avatar = 9;
 }
 
 message GetUserListResponse {
