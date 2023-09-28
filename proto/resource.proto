@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option go_package = "github.com/shenxiang11/yellowbook-proto/proto";
+
+enum ResourcePurpose {
+  UNKNOWN = 0;
+  UserAvatar = 1;
+}
