@@ -6,3 +6,8 @@ enum ResourcePurpose {
   UNKNOWN = 0;
   UserAvatar = 1;
 }
+
+// web
+message UploadRequest {
+  ResourcePurpose purpose = 1;
+}
