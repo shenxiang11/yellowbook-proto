@@ -12,6 +12,7 @@ export interface ProfileResponse {
   nickname: string;
   birthday: string;
   introduction: string;
+  avatar: string;
 }
 
 export interface SignUpRequest {
@@ -28,6 +29,7 @@ export interface EditRequest {
   nickname: string;
   birthday: string;
   introduction: string;
+  avatar: string;
 }
 
 export interface SendLoginSMSCodeRequest {
@@ -48,6 +50,7 @@ export interface User {
   introduction: string;
   createTime: string;
   updateTime: string;
+  avatar: string;
 }
 
 export interface GetUserListResponse {
@@ -71,7 +74,7 @@ export interface GetUserListRequest {
 }
 
 function createBaseProfileResponse(): ProfileResponse {
-  return { userId: 0, email: "", phone: "", nickname: "", birthday: "", introduction: "" };
+  return { userId: 0, email: "", phone: "", nickname: "", birthday: "", introduction: "", avatar: "" };
 }
 
 export const ProfileResponse = {
@@ -93,6 +96,9 @@ export const ProfileResponse = {
     }
     if (message.introduction !== "") {
       writer.uint32(50).string(message.introduction);
+    }
+    if (message.avatar !== "") {
+      writer.uint32(58).string(message.avatar);
     }
     return writer;
   },
@@ -146,6 +152,13 @@ export const ProfileResponse = {
 
           message.introduction = reader.string();
           continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.avatar = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -163,6 +176,7 @@ export const ProfileResponse = {
       nickname: isSet(object.nickname) ? String(object.nickname) : "",
       birthday: isSet(object.birthday) ? String(object.birthday) : "",
       introduction: isSet(object.introduction) ? String(object.introduction) : "",
+      avatar: isSet(object.avatar) ? String(object.avatar) : "",
     };
   },
 
@@ -186,6 +200,9 @@ export const ProfileResponse = {
     if (message.introduction !== "") {
       obj.introduction = message.introduction;
     }
+    if (message.avatar !== "") {
+      obj.avatar = message.avatar;
+    }
     return obj;
   },
 
@@ -200,6 +217,7 @@ export const ProfileResponse = {
     message.nickname = object.nickname ?? "";
     message.birthday = object.birthday ?? "";
     message.introduction = object.introduction ?? "";
+    message.avatar = object.avatar ?? "";
     return message;
   },
 };
@@ -353,7 +371,7 @@ export const LoginRequest = {
 };
 
 function createBaseEditRequest(): EditRequest {
-  return { nickname: "", birthday: "", introduction: "" };
+  return { nickname: "", birthday: "", introduction: "", avatar: "" };
 }
 
 export const EditRequest = {
@@ -366,6 +384,9 @@ export const EditRequest = {
     }
     if (message.introduction !== "") {
       writer.uint32(26).string(message.introduction);
+    }
+    if (message.avatar !== "") {
+      writer.uint32(34).string(message.avatar);
     }
     return writer;
   },
@@ -398,6 +419,13 @@ export const EditRequest = {
 
           message.introduction = reader.string();
           continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.avatar = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -412,6 +440,7 @@ export const EditRequest = {
       nickname: isSet(object.nickname) ? String(object.nickname) : "",
       birthday: isSet(object.birthday) ? String(object.birthday) : "",
       introduction: isSet(object.introduction) ? String(object.introduction) : "",
+      avatar: isSet(object.avatar) ? String(object.avatar) : "",
     };
   },
 
@@ -426,6 +455,9 @@ export const EditRequest = {
     if (message.introduction !== "") {
       obj.introduction = message.introduction;
     }
+    if (message.avatar !== "") {
+      obj.avatar = message.avatar;
+    }
     return obj;
   },
 
@@ -437,6 +469,7 @@ export const EditRequest = {
     message.nickname = object.nickname ?? "";
     message.birthday = object.birthday ?? "";
     message.introduction = object.introduction ?? "";
+    message.avatar = object.avatar ?? "";
     return message;
   },
 };
@@ -573,7 +606,17 @@ export const LoginSMSRequest = {
 };
 
 function createBaseUser(): User {
-  return { id: 0, email: "", phone: "", nickname: "", birthday: "", introduction: "", createTime: "", updateTime: "" };
+  return {
+    id: 0,
+    email: "",
+    phone: "",
+    nickname: "",
+    birthday: "",
+    introduction: "",
+    createTime: "",
+    updateTime: "",
+    avatar: "",
+  };
 }
 
 export const User = {
@@ -601,6 +644,9 @@ export const User = {
     }
     if (message.updateTime !== "") {
       writer.uint32(66).string(message.updateTime);
+    }
+    if (message.avatar !== "") {
+      writer.uint32(74).string(message.avatar);
     }
     return writer;
   },
@@ -668,6 +714,13 @@ export const User = {
 
           message.updateTime = reader.string();
           continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.avatar = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -687,6 +740,7 @@ export const User = {
       introduction: isSet(object.introduction) ? String(object.introduction) : "",
       createTime: isSet(object.createTime) ? String(object.createTime) : "",
       updateTime: isSet(object.updateTime) ? String(object.updateTime) : "",
+      avatar: isSet(object.avatar) ? String(object.avatar) : "",
     };
   },
 
@@ -716,6 +770,9 @@ export const User = {
     if (message.updateTime !== "") {
       obj.updateTime = message.updateTime;
     }
+    if (message.avatar !== "") {
+      obj.avatar = message.avatar;
+    }
     return obj;
   },
 
@@ -732,6 +789,7 @@ export const User = {
     message.introduction = object.introduction ?? "";
     message.createTime = object.createTime ?? "";
     message.updateTime = object.updateTime ?? "";
+    message.avatar = object.avatar ?? "";
     return message;
   },
 };
