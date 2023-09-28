@@ -4,19 +4,23 @@ import _m0 from "protobufjs/minimal";
 export const protobufPackage = "";
 
 export enum ResourcePurpose {
-  UNKNOWN = 0,
+  PurposeUnknown = 0,
   UserAvatar = 1,
+  UserContent = 2,
   UNRECOGNIZED = -1,
 }
 
 export function resourcePurposeFromJSON(object: any): ResourcePurpose {
   switch (object) {
     case 0:
-    case "UNKNOWN":
-      return ResourcePurpose.UNKNOWN;
+    case "PurposeUnknown":
+      return ResourcePurpose.PurposeUnknown;
     case 1:
     case "UserAvatar":
       return ResourcePurpose.UserAvatar;
+    case 2:
+    case "UserContent":
+      return ResourcePurpose.UserContent;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -26,10 +30,12 @@ export function resourcePurposeFromJSON(object: any): ResourcePurpose {
 
 export function resourcePurposeToJSON(object: ResourcePurpose): string {
   switch (object) {
-    case ResourcePurpose.UNKNOWN:
-      return "UNKNOWN";
+    case ResourcePurpose.PurposeUnknown:
+      return "PurposeUnknown";
     case ResourcePurpose.UserAvatar:
       return "UserAvatar";
+    case ResourcePurpose.UserContent:
+      return "UserContent";
     case ResourcePurpose.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

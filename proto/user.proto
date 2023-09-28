@@ -2,6 +2,12 @@ syntax = "proto3";
 
 option go_package = "github.com/shenxiang11/yellowbook-proto/proto";
 
+enum Gender {
+  GenderUnknown = 0;
+  Female = 1;
+  Male = 2;
+}
+
 // web
 message ProfileResponse {
   uint64 user_id = 1;
@@ -11,6 +17,7 @@ message ProfileResponse {
   string birthday = 5;
   string introduction = 6;
   string avatar = 7;
+  Gender gender = 8;
 }
 
 message SignUpRequest {
@@ -28,6 +35,7 @@ message EditRequest {
   string birthday = 2;
   string introduction = 3;
   string avatar = 4;
+  Gender gender = 5;
 }
 
 message SendLoginSMSCodeRequest {
@@ -52,6 +60,7 @@ message User {
   string create_time = 7;
   string update_time = 8;
   string avatar = 9;
+  Gender gender = 10;
 }
 
 message GetUserListResponse {
@@ -72,4 +81,5 @@ message GetUserListRequest {
   int32 page = 10;
   int32 page_size = 11;
   int64 birthday = 12;
+  Gender gender = 13;
 }

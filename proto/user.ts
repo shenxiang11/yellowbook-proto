@@ -4,6 +4,45 @@ import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "";
 
+export enum Gender {
+  GenderUnknown = 0,
+  Female = 1,
+  Male = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function genderFromJSON(object: any): Gender {
+  switch (object) {
+    case 0:
+    case "GenderUnknown":
+      return Gender.GenderUnknown;
+    case 1:
+    case "Female":
+      return Gender.Female;
+    case 2:
+    case "Male":
+      return Gender.Male;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Gender.UNRECOGNIZED;
+  }
+}
+
+export function genderToJSON(object: Gender): string {
+  switch (object) {
+    case Gender.GenderUnknown:
+      return "GenderUnknown";
+    case Gender.Female:
+      return "Female";
+    case Gender.Male:
+      return "Male";
+    case Gender.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 /** web */
 export interface ProfileResponse {
   userId: number;
@@ -13,6 +52,7 @@ export interface ProfileResponse {
   birthday: string;
   introduction: string;
   avatar: string;
+  gender: Gender;
 }
 
 export interface SignUpRequest {
@@ -30,6 +70,7 @@ export interface EditRequest {
   birthday: string;
   introduction: string;
   avatar: string;
+  gender: Gender;
 }
 
 export interface SendLoginSMSCodeRequest {
@@ -51,6 +92,7 @@ export interface User {
   createTime: string;
   updateTime: string;
   avatar: string;
+  gender: Gender;
 }
 
 export interface GetUserListResponse {
@@ -71,10 +113,11 @@ export interface GetUserListRequest {
   page: number;
   pageSize: number;
   birthday: number;
+  gender: Gender;
 }
 
 function createBaseProfileResponse(): ProfileResponse {
-  return { userId: 0, email: "", phone: "", nickname: "", birthday: "", introduction: "", avatar: "" };
+  return { userId: 0, email: "", phone: "", nickname: "", birthday: "", introduction: "", avatar: "", gender: 0 };
 }
 
 export const ProfileResponse = {
@@ -99,6 +142,9 @@ export const ProfileResponse = {
     }
     if (message.avatar !== "") {
       writer.uint32(58).string(message.avatar);
+    }
+    if (message.gender !== 0) {
+      writer.uint32(64).int32(message.gender);
     }
     return writer;
   },
@@ -159,6 +205,13 @@ export const ProfileResponse = {
 
           message.avatar = reader.string();
           continue;
+        case 8:
+          if (tag !== 64) {
+            break;
+          }
+
+          message.gender = reader.int32() as any;
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -177,6 +230,7 @@ export const ProfileResponse = {
       birthday: isSet(object.birthday) ? String(object.birthday) : "",
       introduction: isSet(object.introduction) ? String(object.introduction) : "",
       avatar: isSet(object.avatar) ? String(object.avatar) : "",
+      gender: isSet(object.gender) ? genderFromJSON(object.gender) : 0,
     };
   },
 
@@ -203,6 +257,9 @@ export const ProfileResponse = {
     if (message.avatar !== "") {
       obj.avatar = message.avatar;
     }
+    if (message.gender !== 0) {
+      obj.gender = genderToJSON(message.gender);
+    }
     return obj;
   },
 
@@ -218,6 +275,7 @@ export const ProfileResponse = {
     message.birthday = object.birthday ?? "";
     message.introduction = object.introduction ?? "";
     message.avatar = object.avatar ?? "";
+    message.gender = object.gender ?? 0;
     return message;
   },
 };
@@ -371,7 +429,7 @@ export const LoginRequest = {
 };
 
 function createBaseEditRequest(): EditRequest {
-  return { nickname: "", birthday: "", introduction: "", avatar: "" };
+  return { nickname: "", birthday: "", introduction: "", avatar: "", gender: 0 };
 }
 
 export const EditRequest = {
@@ -387,6 +445,9 @@ export const EditRequest = {
     }
     if (message.avatar !== "") {
       writer.uint32(34).string(message.avatar);
+    }
+    if (message.gender !== 0) {
+      writer.uint32(40).int32(message.gender);
     }
     return writer;
   },
@@ -426,6 +487,13 @@ export const EditRequest = {
 
           message.avatar = reader.string();
           continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.gender = reader.int32() as any;
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -441,6 +509,7 @@ export const EditRequest = {
       birthday: isSet(object.birthday) ? String(object.birthday) : "",
       introduction: isSet(object.introduction) ? String(object.introduction) : "",
       avatar: isSet(object.avatar) ? String(object.avatar) : "",
+      gender: isSet(object.gender) ? genderFromJSON(object.gender) : 0,
     };
   },
 
@@ -458,6 +527,9 @@ export const EditRequest = {
     if (message.avatar !== "") {
       obj.avatar = message.avatar;
     }
+    if (message.gender !== 0) {
+      obj.gender = genderToJSON(message.gender);
+    }
     return obj;
   },
 
@@ -470,6 +542,7 @@ export const EditRequest = {
     message.birthday = object.birthday ?? "";
     message.introduction = object.introduction ?? "";
     message.avatar = object.avatar ?? "";
+    message.gender = object.gender ?? 0;
     return message;
   },
 };
@@ -616,6 +689,7 @@ function createBaseUser(): User {
     createTime: "",
     updateTime: "",
     avatar: "",
+    gender: 0,
   };
 }
 
@@ -647,6 +721,9 @@ export const User = {
     }
     if (message.avatar !== "") {
       writer.uint32(74).string(message.avatar);
+    }
+    if (message.gender !== 0) {
+      writer.uint32(80).int32(message.gender);
     }
     return writer;
   },
@@ -721,6 +798,13 @@ export const User = {
 
           message.avatar = reader.string();
           continue;
+        case 10:
+          if (tag !== 80) {
+            break;
+          }
+
+          message.gender = reader.int32() as any;
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -741,6 +825,7 @@ export const User = {
       createTime: isSet(object.createTime) ? String(object.createTime) : "",
       updateTime: isSet(object.updateTime) ? String(object.updateTime) : "",
       avatar: isSet(object.avatar) ? String(object.avatar) : "",
+      gender: isSet(object.gender) ? genderFromJSON(object.gender) : 0,
     };
   },
 
@@ -773,6 +858,9 @@ export const User = {
     if (message.avatar !== "") {
       obj.avatar = message.avatar;
     }
+    if (message.gender !== 0) {
+      obj.gender = genderToJSON(message.gender);
+    }
     return obj;
   },
 
@@ -790,6 +878,7 @@ export const User = {
     message.createTime = object.createTime ?? "";
     message.updateTime = object.updateTime ?? "";
     message.avatar = object.avatar ?? "";
+    message.gender = object.gender ?? 0;
     return message;
   },
 };
@@ -882,6 +971,7 @@ function createBaseGetUserListRequest(): GetUserListRequest {
     page: 0,
     pageSize: 0,
     birthday: 0,
+    gender: 0,
   };
 }
 
@@ -922,6 +1012,9 @@ export const GetUserListRequest = {
     }
     if (message.birthday !== 0) {
       writer.uint32(96).int64(message.birthday);
+    }
+    if (message.gender !== 0) {
+      writer.uint32(104).int32(message.gender);
     }
     return writer;
   },
@@ -1017,6 +1110,13 @@ export const GetUserListRequest = {
 
           message.birthday = longToNumber(reader.int64() as Long);
           continue;
+        case 13:
+          if (tag !== 104) {
+            break;
+          }
+
+          message.gender = reader.int32() as any;
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1040,6 +1140,7 @@ export const GetUserListRequest = {
       page: isSet(object.page) ? Number(object.page) : 0,
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
       birthday: isSet(object.birthday) ? Number(object.birthday) : 0,
+      gender: isSet(object.gender) ? genderFromJSON(object.gender) : 0,
     };
   },
 
@@ -1081,6 +1182,9 @@ export const GetUserListRequest = {
     if (message.birthday !== 0) {
       obj.birthday = Math.round(message.birthday);
     }
+    if (message.gender !== 0) {
+      obj.gender = genderToJSON(message.gender);
+    }
     return obj;
   },
 
@@ -1101,6 +1205,7 @@ export const GetUserListRequest = {
     message.page = object.page ?? 0;
     message.pageSize = object.pageSize ?? 0;
     message.birthday = object.birthday ?? 0;
+    message.gender = object.gender ?? 0;
     return message;
   },
 };
